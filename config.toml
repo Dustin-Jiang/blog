@@ -1,17 +1,38 @@
-baseURL = "https://szclsya.me"
-languageCode = "en-us"
-DefaultContentLanguage = "en"
-title = "Leo's Field"
+baseURL = "http://localhost"
+languageCode = "zh-cn"
+DefaultContentLanguage = "zh-cn"
+title = "Thoughts@Tsukino"
 
 [markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      extra = true
+
+      [markup.goldmark.extensions.extras]
+        [markup.goldmark.extensions.extras.delete]
+          enable = true
+        [markup.goldmark.extensions.extras.insert]
+          enable = true
+        [markup.goldmark.extensions.extras.mark]
+          enable = true
+        [markup.goldmark.extensions.extras.subscript]
+          enable = true
+        [markup.goldmark.extensions.extras.superscript]
+          enable = true
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['$$', '$$']]
+          inline = [['$', '$']]
+
   [markup.highlight]
     lineNos = true
     lineNumbersInTable = true
     noClasses = false
 
 [params]
-  description = "Increscunt animi, virescit volnere virtus."
-  author = "Leo Shen"
+  description = "眼见何事, 情系何处, 身在何方, 心思何人?"
+  author = "浅見ツキノ"
 
 [taxonomies]
   tag = "tags"
@@ -21,6 +42,6 @@ title = "Leo's Field"
 
 [languages]
   [languages.en]
-    weight = 1
-  [languages.zh-cn]
     weight = 2
+  [languages.zh-cn]
+    weight = 1
