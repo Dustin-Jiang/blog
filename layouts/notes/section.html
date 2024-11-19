@@ -7,7 +7,7 @@
     <header> 
       <div id="nav" class="slim">
         <div class="location">
-          <a id="site-title" class="no-dot" href='{{ "/" | relLangURL }}'>Leo's Field</a>
+          <a id="site-title" class="no-dot" href='{{ "/" | relLangURL }}'>{{ .Site.Title }}</a>
         </div>
         <div class="after">
           {{ partial "slim-header.html" . }}
