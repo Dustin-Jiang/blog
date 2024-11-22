@@ -1,0 +1,202 @@
+{
+  "main": {
+    "id": "603ddcd3cbe8a93a",
+    "type": "split",
+    "children": [
+      {
+        "id": "626bf956d5577f2a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "80af43ee6db702c9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "about.zh-cn.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "about.zh-cn"
+            }
+          },
+          {
+            "id": "6047fd11b5ad1168",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/life/summary-2019.zh-cn.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "summary-2019.zh-cn"
+            }
+          },
+          {
+            "id": "3bfdadb8fc594663",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/life/summary-2020.zh-cn.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "summary-2020.zh-cn"
+            }
+          },
+          {
+            "id": "c1afb4ff38463901",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "summary-2021.zh-cn.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "summary-2021.zh-cn"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8dd57c73cc3975e2",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "9528962f995501bb",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "alphabetical"
+          },
+          "icon": "lucide-folder-closed",
+          "title": "文件列表"
+        }
+      },
+      {
+        "id": "809c74cca315ac83",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "path:\"posts/life/\" ",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          },
+          "icon": "lucide-search",
+          "title": "搜索"
+        }
+      },
+      {
+        "id": "4f2d711f43d929b7",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true
+          },
+          "icon": "lucide-tags",
+          "title": "标签"
+        }
+      },
+      {
+        "id": "83960e6c15269862",
+        "type": "leaf",
+        "state": {
+          "type": "bookmarks",
+          "state": {},
+          "icon": "lucide-bookmark",
+          "title": "书签"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "06785d9b456ac6b5",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "986f27561086a742",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "about.zh-cn.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-coming-in",
+          "title": "反向链接"
+        }
+      },
+      {
+        "id": "75402d47c7a076b0",
+        "type": "leaf",
+        "state": {
+          "type": "outgoing-link",
+          "state": {
+            "file": "about.zh-cn.md",
+            "linksCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-going-out",
+          "title": "出链"
+        }
+      },
+      {
+        "id": "f2d8d9dea0c7fd68",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "about.zh-cn.md"
+          },
+          "icon": "lucide-list",
+          "title": "大纲"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "c1afb4ff38463901",
+  "lastOpenFiles": [
+    "posts/life/summary-2020.zh-cn.md",
+    "summary-2021.zh-cn.md",
+    "posts/life/summary-2019.zh-cn.md",
+    "posts/study/first-order-circuit.zh-cn.md",
+    "_index.zh-cn.md",
+    "about.zh-cn.md"
+  ]
+}
