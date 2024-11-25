@@ -8,7 +8,7 @@ DESCRIPTION: 离开了家, 看到了更大的世界.
 ---
 {{< img src="/img/life/2023/Intro.png" >}}
 {{< img src="/img/life/2023/Even.jpg" caption="巴邑火锅传奇果盘哥" >}}
-{{< img src="/img/life/2023/Leaf_april.png" caption="树叶在四月落下. " >}}
+{{< img src="/img/life/2023/Leaf_April.png" caption="树叶在四月落下. " >}}
 {{< img src="/img/life/2023/WestLake.jpg" caption="和妈妈在西湖" >}}
 {{< img src="/img/life/2023/Badge.jpg" caption="远去的人送的胸针. " >}}
 {{< img src="/img/life/2023/KeyboardPolitic.jpg" caption="一起键政的哥们" >}}
