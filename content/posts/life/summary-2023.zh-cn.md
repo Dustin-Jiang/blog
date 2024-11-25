@@ -15,7 +15,7 @@ DESCRIPTION: 离开了家, 看到了更大的世界.
 {{< img src="/img/life/2023/Graduate.jpg" caption="毕业合影" >}}
 {{< img src="/img/life/2023/Seaside.jpg" caption="高考后和妈妈在海边" >}}
 {{< img src="/img/life/2023/SUST.jpg" caption="第一次, 可能也是最后一次去上科大. " >}}
-{{< img src="/img/life/2023/AyanamiWIthGPU.jpg" caption="和显卡站在一起的レイ" >}}
+{{< img src="/img/life/2023/AyanamiWithGPU.jpg" caption="和显卡站在一起的レイ" >}}
 {{< img src="/img/life/2023/CR400BF.jpg" caption="拍 CR400BF" >}}
 {{< img src="/img/life/2023/EvangelionStore.jpg" caption="EVANGELION STORE" >}}
 {{< img src="/img/life/2023/Genshin.jpg" caption="玩__玩的" >}}
