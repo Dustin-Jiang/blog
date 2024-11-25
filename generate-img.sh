@@ -58,3 +58,22 @@ for img in $(find ./img | grep "png$"); do
         convert "$img" -resize "$SIZE" -strip "${new_path/'.png'/'.avif'}"
     fi
 done
+
+for img in $(find ./img | grep "heic$"); do
+    echo "Converting $img..."
+    new_path=${img/'./img/'/'./assets/img/'}
+    mkdir -p "$(dirname "$new_path")"
+    # Generate minified JPG
+    if [[ ! -e $new_path ]]; then
+        convert "$img" -resize "$SIZE" -strip -interlace Plane -gaussian-blur 0.05 -quality 60% "${new_path/'.heic'/'.jpg'}"
+    fi
+
+    # Generate lossless WebP
+    if [[ ! -e ${new_path/'.heic'/'.webp'} ]]; then
+        convert "$img" -resize "$SIZE" -strip -define webp:lossless=true "${new_path/'.heic'/'.webp'}"
+    fi
+    # Generate AVIF
+    if [[ ! -e ${new_path/'.heic'/'.avif'} ]]; then
+        convert "$img" -resize "$SIZE" -strip "${new_path/'.heic'/'.avif'}"
+    fi
+done

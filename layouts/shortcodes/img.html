@@ -6,6 +6,7 @@
   <picture>
     {{- $isJPG := eq $Ext ".jpg" -}}
     {{- $isPNG := eq $Ext ".png" -}}
+    {{- $isHEIC := eq $Ext ".heic" -}}
 
     {{- if ($isJPG) -}}
       {{- $avifPath:= replace $src ".jpg" ".avif" -}}
@@ -39,6 +40,23 @@
       {{- end -}}
     {{- end }}
 
+    {{ if ($isHEIC) -}}
+      {{- $avifPath:= replace $src ".heic" ".avif" -}}
+      {{- $avifImage := resources.Get (printf "%s" $avifPath) -}}
+
+      {{ if $avifImage -}}
+        <source srcset="{{ $avifImage.Permalink }}" type="image/avif" >
+      {{- end }}
+
+      {{ $webpPath:= replace $src ".heic" ".webp" }}
+      {{- $webpImage := resources.Get (printf "%s" $webpPath) -}}
+
+      {{- if $webpImage -}}
+        <source srcset="{{ $webpImage.Permalink }}" type="image/webp" >
+      {{- end -}}
+
+      {{- $src = replace $src ".heic" ".jpg" -}}
+    {{- end }}
     {{- $image := resources.Get (printf "%s" $src) -}}
     <img
       src="{{ $image.Permalink }}"
