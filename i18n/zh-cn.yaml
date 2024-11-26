@@ -3,6 +3,8 @@ date-format:
   other: '2006-01-02'
 
 # slim-header
+collects:
+  other: '收集'
 posts:
   other: '文章'
 about-me:

@@ -3,6 +3,8 @@ date-format:
   other: 'Jan 2, 2006'
 
 # slim-header
+collects:
+  other: 'Collects'
 posts:
   other: 'Posts'
 about-me:
