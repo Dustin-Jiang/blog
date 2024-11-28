@@ -1,4 +1,4 @@
-baseURL = "http://localhost"
+baseURL = "https://tsukino.top"
 languageCode = "zh-cn"
 DefaultContentLanguage = "zh-cn"
 title = "Thoughts@Tsukino"
