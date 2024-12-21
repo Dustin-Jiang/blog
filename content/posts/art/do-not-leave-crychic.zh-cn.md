@@ -4,6 +4,7 @@ DATE: 2024-12-21T01:26:36
 TAGS:
   - art
 DESCRIPTION: 我也许一辈子都忘不掉 CRYCHIC 了
+LICENSE: cc-sa
 ---
 
 {{< html >}}
