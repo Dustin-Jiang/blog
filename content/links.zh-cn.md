@@ -1,6 +1,6 @@
 ---
-- TITLE: Links
-- DATE: 2019-09-23T00:57:56
+TITLE: Links
+DATE: 2019-09-23T00:57:56
 ---
 
 # お友達
