@@ -1,12 +1,11 @@
 ---
 TITLE: 年度总结 2024
-DATE: 2025-01-01T00:00:00
+DATE: 2024-12-31T16:00:00+08:00
 TAGS:
   - life
 SERIES: annual_summary
 DESCRIPTION: お幸せに。
 ---
-
 {{< img src="/img/life/2024/PalaceMuseum.heic" caption="故宫残雪" >}}
 {{< img src="/img/life/2024/Fishing.heic" caption="钓鱼佬永不空军" >}}
 {{< img src="/img/life/2024/Boys.jpg" caption="丹霄某集团年会" >}}
