@@ -1,6 +1,6 @@
 ---
 TITLE: 年度总结 2024
-DATE: 2024-01-01T00:00:00
+DATE: 2025-01-01T00:00:00
 TAGS:
   - life
 SERIES: annual_summary
