@@ -23,13 +23,13 @@ DESCRIPTION: お幸せに。
 {{< img src="/img/life/2024/BuildingPC.heic" caption="给某人装了台电脑" >}}
 {{< img src="/img/life/2024/BetterThanCamera.heic" caption="感觉不如手机" >}}
 {{< img src="/img/life/2024/NewCamera.heic" caption="Welcome Home. " >}}
-{{< img src="/img/life/2024/Party.JPG" caption="轰趴" >}}
-{{< img src="/img/life/2024/Party2.JPG" caption="轰趴中的某人" >}}
-{{< img src="/img/life/2024/Party3.JPG" caption="怎么有人轰趴还不忘拍星星啊 (" >}}
+{{< img src="/img/life/2024/Party.jpg" caption="轰趴" >}}
+{{< img src="/img/life/2024/Party2.jpg" caption="轰趴中的某人" >}}
+{{< img src="/img/life/2024/Party3.jpg" caption="怎么有人轰趴还不忘拍星星啊 (" >}}
 {{< img src="/img/life/2024/TomoSaki.heic" caption="だめですわ！" >}}
 {{< img src="/img/life/2024/Haruhikage.jpg" caption="是我们的歌啊。" >}}
 {{< img src="/img/life/2024/Hana.jpg" caption="春日影。" >}}
-{{< img src="/img/life/2024/Flower.JPG" caption="尼康拍花" >}}
+{{< img src="/img/life/2024/Flower.jpg" caption="尼康拍花" >}}
 {{< img src="/img/life/2024/Flower2.png" caption="拍花还是不错的" >}}
 {{< img src="/img/life/2024/BirdNest.png" caption="也是进了鸟巢了" >}}
 {{< img src="/img/life/2024/Icing.png" caption="是看起来很高级的国家速滑馆" >}}
@@ -38,11 +38,11 @@ DESCRIPTION: お幸せに。
 {{< img src="/img/life/2024/BeijingStation.png" caption="京沪线 0km 处。" >}}
 {{< img src="/img/life/2024/CR200J.heic" caption="请君入桶" >}}
 {{< img src="/img/life/2024/Seaside.png" caption="在海边" >}}
-{{< img src="/img/life/2024/Ecomony.JPG" caption="标语跨越四十载" >}}
+{{< img src="/img/life/2024/Ecomony.jpg" caption="标语跨越四十载" >}}
 {{< img src="/img/life/2024/NAS.heic" caption="一定只是鞋盒" >}}
 {{< img src="/img/life/2024/BushiroadExpo.heic" caption="排队两小时十分钟" >}}
 {{< img src="/img/life/2024/Tangkeke.png" caption="唉你们偶像厨" >}}
-{{< img src="/img/life/2024/Mutsumi.JPG" caption="年度最大诈骗：喜怒哀乐" >}}
+{{< img src="/img/life/2024/Mutsumi.jpg" caption="年度最大诈骗：喜怒哀乐" >}}
 {{< img src="/img/life/2024/Raana.heic" caption="可爱猫猫" >}}
 {{< img src="/img/life/2024/TokyoTower.png" caption="約束タワー" >}}
 {{< img src="/img/life/2024/SobuLine.heic" caption="中央・総武緩行線" >}}
@@ -52,7 +52,7 @@ DESCRIPTION: お幸せに。
 {{< img src="/img/life/2024/KyotoStation.heic" caption="京都站" >}}
 {{< img src="/img/life/2024/Platform0.heic" caption="少见的 0 站台" >}}
 {{< img src="/img/life/2024/ShinKaisoku.heic" caption="JR 西的必杀武器" >}}
-{{< img src="/img/life/2024/Kiyomizu.JPG" caption="清水寺" >}}
+{{< img src="/img/life/2024/Kiyomizu.jpg" caption="清水寺" >}}
 {{< img src="/img/life/2024/KeihanLine.heic" caption="京吹啊不京阪宇治线" >}}
 {{< img src="/img/life/2024/Uji.heic" caption="宇治站在宇治南侧" >}}
 {{< img src="/img/life/2024/LizToAoiTori.heic" caption="京阿尼的手稿" >}}
