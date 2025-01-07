@@ -45,3 +45,6 @@ title = "Thoughts@Tsukino"
     weight = 2
   [languages.zh-cn]
     weight = 1
+[services]
+  [services.googleAnalytics]
+    id = 'G-P8LEYB1KTM'
