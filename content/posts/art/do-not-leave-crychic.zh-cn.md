@@ -5,6 +5,7 @@ TAGS:
   - art
 DESCRIPTION: 我也许一辈子都忘不掉 CRYCHIC 了
 LICENSE: cc-sa
+SERIES: mygo
 ---
 
 {{< html >}}
