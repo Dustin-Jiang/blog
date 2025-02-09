@@ -25,7 +25,7 @@ html
       width: 14em
   @media screen and (max-width: $singleColWidth)
     margin: 0 auto
-    padding: 0 .7em
+    padding: 0 1.5em
     max-width: 50em
     min-height: calc(100% - 2rem)
     .container-content
@@ -50,7 +50,9 @@ html
 
 #nav
   display: flex
-  height: 2em
+  flex-wrap: wrap
+  justify-content: space-between
+  gap: 0.5em
   a
     line-height: 1em
     padding: .3em 0
@@ -60,7 +62,6 @@ html
     height: 1.1em
     width: 1.1em
   .after
-    margin-left: auto
     a
       margin-left: .3em
 
