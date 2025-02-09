@@ -1,0 +1,17 @@
+{{ $inner := (.Inner) }}
+{{ $hasInner := ne $inner "" }}
+
+{{ $borderStyle := (.Get "style") }}
+{{ if eq $borderStyle "" }}
+  {{ $borderStyle = "solid" }}
+{{ end }}
+
+<div class="hr" style="border-bottom-style: {{ $borderStyle }}">
+  <div class="line"></div>
+
+  {{ if ($hasInner) }}
+    <span>{{ $inner }}</span>
+  {{ end }}
+
+  <div class="line"></div>
+</div>
