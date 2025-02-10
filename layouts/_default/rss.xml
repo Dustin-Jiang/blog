@@ -12,10 +12,14 @@
 {{- end -}}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <follow_challenge>
+      <feedId>105158564100830208</feedId>
+      <userId>81570282217869312</userId>
+  </follow_challenge>
   <channel>
     <title>{{ .Site.Title }}</title>
     <link>{{ .Permalink }}</link>
-    <description>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}</description>
+    <description>{{ .Site.Params.Description }}</description>
     <generator>Hugo -- gohugo.io</generator>
 
     {{ with .Site.LanguageCode }}
