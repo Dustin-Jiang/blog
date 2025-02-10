@@ -1,0 +1,14 @@
+{{ $inner := (.Inner) }}
+{{ $hasInner := ne $inner "" }}
+
+{{ $borderStyle := (.Get "style") }}
+{{ if eq $borderStyle "" }}
+  {{ $borderStyle = "solid" }}
+{{ end }}
+
+<div class="hr" style="text-align: center;">
+  {{ if ($hasInner) }}
+    <span>{{ $inner }}</span>
+  {{ end }}
+  <hr style="border-style: {{ $borderStyle }}; " />
+</div>

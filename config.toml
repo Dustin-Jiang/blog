@@ -2,6 +2,7 @@ baseURL = "https://tsukino.top"
 languageCode = "zh-cn"
 DefaultContentLanguage = "zh-cn"
 title = "Thoughts@Tsukino"
+copyright = '© Dustin Jiang'
 
 [markup]
   [markup.goldmark]
@@ -32,7 +33,9 @@ title = "Thoughts@Tsukino"
 
 [params]
   description = "眼见何事, 情系何处, 身在何方, 心思何人?"
-  author = "浅見ツキノ"
+  [params.author]
+    email = 'i@tsukino.topi@tsukino.top'
+    name = "浅見ツキノ"
 
 [taxonomies]
   tag = "tags"
