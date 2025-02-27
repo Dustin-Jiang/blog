@@ -4,6 +4,8 @@ DefaultContentLanguage = "zh-cn"
 title = "Thoughts@Tsukino"
 copyright = '© Dustin Jiang'
 
+timeZone = "Asia/Shanghai"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.extensions]
@@ -34,7 +36,7 @@ copyright = '© Dustin Jiang'
 [params]
   description = "眼见何事, 情系何处, 身在何方, 心思何人?"
   [params.author]
-    email = 'i@tsukino.topi@tsukino.top'
+    email = 'i@tsukino.top'
     name = "浅見ツキノ"
 
 [taxonomies]
