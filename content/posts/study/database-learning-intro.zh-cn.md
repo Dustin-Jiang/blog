@@ -45,7 +45,7 @@ Yes, Docker sucks, and LONG LIVE containerd!
 ```yaml
 version: "3"
 services:
-  guass:
+  gauss:
     image: enmotech/opengauss:5.0.0
     privileged: true
     restart: always
