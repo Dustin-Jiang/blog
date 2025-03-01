@@ -58,13 +58,19 @@ services:
       - ./data:/var/lib/lib/opengauss
 ```
 
-{{< btw >}}
+{{% btw %}}
 如果你 *不幸* 的是 Docker 用户, 那请自动把本文中的所有 `podman` 命令替换为 `docker`, 然后祝你好运. 
-{{< /btw >}}
+{{% /btw %}}
 
 然后 `podman-compose up -d` 一刀流, 不出意外的话就能启动 OpenGauss 了. 
 
 ## pgAdmin
+
+{{% card warning %}}
+高版本 pgAdmin 不能很好地与 OpenGauss 一起工作, 不感兴趣可以跳过这一部分. 
+
+Reina [测试后指出](https://ri-nai.github.io/Hugo-Blog/post/2025/02/25/hyper-v%E9%85%8D%E7%BD%AEopeneuler%E4%B8%8Eopengauss/#pgadmin4-%E8%BF%9E%E6%8E%A5-opengauss), pgAdmin v4.30 可以比较正常连接 OpenGauss, 但是我使用的 [elestio/pgadmin](https://hub.docker.com/r/elestio/pgadmin) 镜像没有这么老的版本, 因此测试的时候使用不够旧的旧版本依然无果, 于是转向了不同的技术路线, {{< del >}}走了更多弯路. {{< /del >}}
+{{% /card %}}
 
 到此为止, 要访问刚搭建好的数据库, 只能 `podman exec -it <CONTAINER_ID> /bin/bash` 进入容器内部, 然后
 
@@ -94,7 +100,7 @@ CREATE USER <DATABASE_USERNAME> WITH SYSADMIN password "<DATABASE_USER_PASSWORD>
 ```yaml
 version: "3"
 services:
-  guass:
+  gauss:
     ...
 
   pgadmin:
@@ -129,3 +135,48 @@ services:
 ```
 
 然后照例 `podman-compose up -d` 启动, 不出意外的话在你的 `localhost:18080` 上就能访问到 pgAdmin 面板了. 之后填入先前为 pgAdmin 创建的用户密码, 应该就能登录到数据库中了. 
+
+## Cloudbeaver
+
+由于 pgAdmin 的兼容问题, 经过搜索 Open Gauss 官网散乱的文档后找到了官方提供的 [JDBC 工具](https://opengauss.org/zh/download/) 以及 [使用方法](https://opengauss.org/zh/blogs/justbk/2020-10-30_dbeaver_for_openGauss.html). 
+
+{{% btw %}}
+虽说开源项目嘛, 赚点钱不寒碜; 我个穷学生想不到别的办法了才选择下面的做法, 如果真有生产需要还是希望大家能支持项目开发. 
+{{% /btw %}}
+
+比较操蛋的是, Cloudbeaver 虽然支持加载自定义 JDBC, 但是仅限企业版. 官方在仓库中给了一篇 [语焉不详的指南](https://github.com/dbeaver/cloudbeaver/wiki/Adding-new-database-drivers#adding-drivers-in-cloudbeaver-community-edition), 但毕竟没有什么 Java 开发经验, 试了试按着说明修改, 但连怎么编译都没弄明白. 
+
+好在上网冲浪之后找到了这篇 [前人留下的教程](https://zhuanlan.zhihu.com/p/587648719), 作者好心地写了个 [Python 脚本](https://github.com/Danst-bjtu/CloudbeaverTool) 来魔改 Docker 镜像. 
+
+于是二话不说 Fork 了一个, 加上了 OpenGauss 5.0.0 的 JDBC, 然后手搓了一个 Github Action 发布为 [Docker Image](https://github.com/dustin-jiang/CloudbeaverTool-OpenGauss/pkgs/container/cloudbeaver-opengauss). 残念的是作者当年给的方法现在已经没法用了, 在最新版上不会有效果; 好在我也没必要用最新版, 于是找了个发布时间早于作者最后提交时间的镜像版本, 果然能用! 
+
+然后继续改 `docker-compose.yml`. 
+
+```yaml
+version: "3"
+services:
+  gauss:
+    ...
+
+  cloudbeaver:
+    image: ghcr.io/dustin-jiang/cloudbeaver-opengauss:latest
+    restart: unless-stopped
+    ports:
+      - "8978:8978"
+    environment:
+      - CB_SERVER_URL=http://localhost:8978
+    volumes:
+      - ./cloudbeaver/workspace:/opt/cloudbeaver/workspace
+```
+
+启动之后应该就能在数据库连接的地方选择 OpenGauss 了, 连接时
+
+- 地址填 `host.containers.internal`;
+- 端口为之前配置的主机侧算口, 我这为 `5432`;
+- 用户名和密码填入之前在数据库中新建的用户;
+
+{{< btw >}}
+暂时还没明白为什么是在这里, 按理说应该在 public 下?
+{{< /btw >}}
+
+然后应该就能在 `cloudb` 下面看到数据表了 (如果你 `CREATE TABLE` 了). 
