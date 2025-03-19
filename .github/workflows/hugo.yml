@@ -99,18 +99,6 @@ jobs:
           sudo apt-get update # 建议先更新 apt 仓库
           sudo apt-get install -y imagemagick optipng
 
-      - name: Generate images
-        run: "chmod +x ./generate-img.sh && ./generate-img.sh"
-
-      - name: 缓存 Hugo 构建缓存
-        uses: actions/cache@v4
-        id: cache-hugo-build
-        with:
-          path: ${{ runner.temp }}/hugo_cache # 缓存 Hugo 缓存目录
-          key: hugo-build-cache-${{ runner.os }}-${hashFiles('hugo.toml', 'config.toml', 'themes/**/layouts/**', 'layouts/**', 'content/**')} # 基于 Hugo 配置和内容文件的 hash
-          restore-keys: |
-            hugo-build-cache-${{ runner.os }}-
-
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
