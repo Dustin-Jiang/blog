@@ -1,71 +1,131 @@
-# Sample workflow for building and deploying a Hugo site to GitHub Pages
 name: Deploy Hugo site to Pages
-
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
-
-# Default to bash
 defaults:
   run:
     shell: bash
-
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.128.0
     steps:
-      - name: Install Hugo CLI
+      - name: 缓存 Hugo CLI
+        uses: actions/cache@v4
+        id: cache-hugo
+        with:
+          path: ${{ runner.tool_cache }}/hugo/${{ env.HUGO_VERSION }} # 使用 runner tool cache
+          key: hugo-${{ runner.os }}-${{ env.HUGO_VERSION }}
+          restore-keys: |
+            hugo-${{ runner.os }}-
+
+      - name: 安装 Hugo CLI
+        if: steps.cache-hugo.outputs.cache-hit != 'true' # 仅当缓存未命中时安装
         run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
-      - name: Checkout
+          echo "下载并安装 Hugo v${HUGO_VERSION}"
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+          mkdir -p ${{ runner.tool_cache }}/hugo/${{ env.HUGO_VERSION }} # 创建缓存目录
+          sudo cp /usr/local/bin/hugo ${{ runner.tool_cache }}/hugo/${{ env.HUGO_VERSION }}/hugo # 复制 Hugo 到缓存目录
+          echo "Hugo v${HUGO_VERSION} 已缓存到 tool cache"
+
+      - name: 使用缓存的 Hugo CLI
+        if: steps.cache-hugo.outputs.cache-hit == 'true'
+        run: |
+          echo "使用缓存的 Hugo v${HUGO_VERSION}"
+          sudo cp ${{ runner.tool_cache }}/hugo/${{ env.HUGO_VERSION }}/hugo /usr/local/bin/hugo # 从缓存复制 Hugo
+
+      - name: 缓存 Dart Sass
+        uses: actions/cache@v4
+        id: cache-dart-sass
+        with:
+          path: ~/.pub-cache # Dart pub 缓存目录
+          key: dart-sass-${{ runner.os }}
+          restore-keys: |
+            dart-sass-${{ runner.os }}
+
+      - name: 安装 Dart Sass
+        if: steps.cache-dart-sass.outputs.cache-hit != 'true' # 仅当缓存未命中时安装
+        run: |
+          echo "安装 Dart Sass"
+          sudo snap install dart-sass
+
+      - name: Checkout 代码
         uses: actions/checkout@v4
         with:
           submodules: recursive
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Install Node.js dependencies
-        run: "npm install -g autoprefixer postcss postcss-cli"
-      - name: Install convert and optipng
-        run: "sudo apt-get install -y imagemagick optipng"
+
+      - name: 缓存 Node.js 依赖
+        uses: actions/cache@v4
+        id: cache-node-modules
+        with:
+          path: node_modules # 缓存 node_modules 目录
+          key: node-modules-${{ runner.os }}-${hashFiles('package-lock.json')} # 基于 package-lock.json 的 hash
+          restore-keys: |
+            node-modules-${{ runner.os }}-
+
+      - name: 安装 Node.js 依赖
+        if: steps.cache-node-modules.outputs.cache-hit != 'true' # 仅当缓存未命中时安装
+        run: |
+          echo "安装 Node.js 依赖"
+          npm install -g autoprefixer postcss postcss-cli
+
+      - name: 缓存 apt 软件包
+        uses: actions/cache@v4
+        id: cache-apt-packages
+        with:
+          path: /etc/apt/archives # apt 缓存目录
+          key: apt-packages-${{ runner.os }}-imagemagick-optipng
+          restore-keys: |
+            apt-packages-${{ runner.os }}-
+
+      - name: 安装 convert 和 optipng
+        if: steps.cache-apt-packages.outputs.cache-hit != 'true' # 仅当缓存未命中时安装
+        run: |
+          echo "安装 convert 和 optipng"
+          sudo apt-get update # 建议先更新 apt 仓库
+          sudo apt-get install -y imagemagick optipng
+
       - name: Generate images
         run: "chmod +x ./generate-img.sh && ./generate-img.sh"
+
+      - name: 缓存 Hugo 构建缓存
+        uses: actions/cache@v4
+        id: cache-hugo-build
+        with:
+          path: ${{ runner.temp }}/hugo_cache # 缓存 Hugo 缓存目录
+          key: hugo-build-cache-${{ runner.os }}-${hashFiles('hugo.toml', 'config.toml', 'themes/**/layouts/**', 'layouts/**', 'content/**')} # 基于 Hugo 配置和内容文件的 hash
+          restore-keys: |
+            hugo-build-cache-${{ runner.os }}-
+
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
         run: |
+          echo "使用 Hugo 构建站点"
           hugo \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages
