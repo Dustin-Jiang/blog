@@ -159,7 +159,7 @@ TOC: true
 笑点解析: 因为我懒得下他的镜像, 这个图是装了个名叫 OpenEuler 的 [Alpine](https://www.alpinelinux.org/) 虚拟机, 然后连到服务器上的 Podman 镜像里截的图🤣. 至于为什么装的是 Alpine, 无他, 小就是好!
 {{% /btw %}}
 
-{{< img src="/img/study/database-experiment-1/vm-euler.png" caption="导入OpenEuler虚拟机镜像" >}}
+{{< img src="/img/study/database-experiment-1/vm-euler.png" >}}
 
 虚拟机启动后, 切换到 `omm` 用户, 使用 `gs_ctl status` 命令查看OpenGauss数据库状态. 
 
