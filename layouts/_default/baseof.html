@@ -41,7 +41,7 @@
 	{{- end -}}
   </head>
 
-  <body>
+  <body class="pangu">
     {{- block "main" . -}}
     {{- end -}}
   </body>
@@ -60,4 +60,15 @@
   {{- with resources.Get "js/mk2.js" | resources.Minify -}}
     <script>{{ .Content | safeJS }}</script>
   {{- end -}}
+
+  <!-- pangu.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js"></script>
+  <script>
+    pangu.spacingElementByClassName('pangu');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // listen to any DOM change and automatically perform spacing via MutationObserver()
+      pangu.autoSpacingPage();
+    });
+  </script>
 </html>
