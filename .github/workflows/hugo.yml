@@ -97,7 +97,7 @@ jobs:
         run: |
           echo "安装 convert 和 optipng"
           sudo apt-get update # 建议先更新 apt 仓库
-          sudo apt-get install -y imagemagick optipng libavif-bin libheif-plugins-all
+          sudo apt-get install -y imagemagick optipng libavif-bin libheif1
       
       - name: 转码图片
         run: |
