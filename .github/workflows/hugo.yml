@@ -86,8 +86,7 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true' # 仅当缓存未命中时安装
         run: |
           echo "安装 Node.js 依赖"
-          corepack enable pnpm
-          pnpm install -g autoprefixer postcss postcss-cli
+          npm install -g autoprefixer postcss postcss-cli
 
       - name: 安装 convert 和 optipng
         run: |
