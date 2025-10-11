@@ -1,0 +1,117 @@
+Cluster statistics information:
+Host CPU usage rate:
+    Host total CPU time                          :    1597530.000 Jiffies
+    Host CPU busy time                           :    594440.000 Jiffies
+    Host CPU iowait time                         :    2360.000   Jiffies
+    Host CPU busy time ratio                     :    37.21      %
+    Host CPU iowait time ratio                   :    .15        %
+MPPDB CPU usage rate:
+    MPPDB CPU time % in busy time                :    100.00     %
+    MPPDB CPU time % in total time               :    37.45      %
+Shared buffer hit rate:
+    Shared Buffer Reads                          :    707
+    Shared Buffer Hits                           :    105215
+    Shared Buffer Hit ratio                      :    99.33      %
+In memory sort rate:
+    In-memory sort count                         :    0
+    In-disk sort count                           :    0
+    In-memory sort ratio                         :    0
+I/O usage:
+    Number of files                              :    111
+    Physical Reads                               :    408
+    Physical Writes                              :    465
+    Read Time                                    :    110738     ms
+    Write Time                                   :    3733       ms
+Disk usage:
+    DB size                                      :    32         MB
+    Total Physical writes                        :    465
+    Average Physical write                       :    124564.69
+    Maximum Physical write                       :    465
+Activity statistics:
+    Active SQL count                             :    4
+    Session count                                :    6
+Node statistics information:
+dn_6001:
+    MPPDB CPU Time                               :    598290     Jiffies
+    Host CPU Busy Time                           :    594440     Jiffies
+    Host CPU Total Time                          :    1597530    Jiffies
+    MPPDB CPU Time % in Busy Time                :    100.00     %
+    MPPDB CPU Time % in Total Time               :    37.45      %
+    Physical memory                              :    3595235328 Bytes
+    DB Memory usage                              :    3656589312 Bytes
+    Shared buffer size                           :    268435456  Bytes
+    Shared buffer hit ratio                      :    99.33      %
+    Sorts in memory                              :    0
+    Sorts in disk                                :    0
+    In-memory sort ratio                         :    0
+    Number of files                              :    111
+    Physical Reads                               :    408
+    Physical Writes                              :    465
+    Read Time                                    :    110738
+    Write Time                                   :    3733
+Session statistics information(Top 10):
+Session CPU statistics:
+1 dn_6001-postgres-omm:
+    Session CPU time                             :    2
+    Database CPU time                            :    598540
+    Session CPU time %                           :    0.00       %
+2 dn_6001-postgres-omm:
+    Session CPU time                             :    0
+    Database CPU time                            :    598540
+    Session CPU time %                           :    0.00       %
+3 dn_6001-postgres-omm:
+    Session CPU time                             :    0
+    Database CPU time                            :    598540
+    Session CPU time %                           :    0.00       %
+4 dn_6001-postgres-omm:
+    Session CPU time                             :    0
+    Database CPU time                            :    598540
+    Session CPU time %                           :    0.00       %
+
+Session Memory statistics:
+1 dn_6001-postgres-omm:
+    Buffer Reads                                 :    1009
+    Shared Buffer Hit ratio                      :    100.00
+    In Memory sorts                              :    1
+    In Disk sorts                                :    0
+    In Memory sorts ratio                        :    100.00
+    Total Memory Size                            :    8879152
+    Used Memory Size                             :    6791048
+2 dn_6001-postgres-omm:
+    Buffer Reads                                 :    283
+    Shared Buffer Hit ratio                      :    100.00
+    In Memory sorts                              :    0
+    In Disk sorts                                :    0
+    In Memory sorts ratio                        :    0
+    Total Memory Size                            :    5890168
+    Used Memory Size                             :    4520008
+3 dn_6001-postgres-omm:
+    Buffer Reads                                 :    282
+    Shared Buffer Hit ratio                      :    99.65
+    In Memory sorts                              :    0
+    In Disk sorts                                :    0
+    In Memory sorts ratio                        :    0
+    Total Memory Size                            :    5881976
+    Used Memory Size                             :    4519248
+4 dn_6001-postgres-omm:
+    Buffer Reads                                 :    1515
+    Shared Buffer Hit ratio                      :    93.29
+    In Memory sorts                              :    0
+    In Disk sorts                                :    0
+    In Memory sorts ratio                        :    0
+    Total Memory Size                            :    5857400
+    Used Memory Size                             :    4554264
+
+Session IO statistics:
+1 dn_6001-postgres-omm:
+    Physical Reads                               :    109
+    Read Time                                    :    22402
+2 dn_6001-postgres-omm:
+    Physical Reads                               :    1
+    Read Time                                    :    2576
+3 dn_6001-postgres-omm:
+    Physical Reads                               :    0
+    Read Time                                    :    0
+4 dn_6001-postgres-omm:
+    Physical Reads                               :    0
+    Read Time                                    :    0
