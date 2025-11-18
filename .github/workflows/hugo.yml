@@ -107,7 +107,7 @@ jobs:
           echo "使用 Hugo 构建站点"
           hugo \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --baseURL "https://tsukino.top/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
