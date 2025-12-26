@@ -4,6 +4,7 @@ DATE: 2025-04-07T22:00:00
 DESCRIPTION: 超高校级的 SQL 实战
 TAGS:
   - study
+  - database
   - opengauss
 SERIES: study-database
 LICENSE: cc-sa

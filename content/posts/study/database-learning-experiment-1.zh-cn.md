@@ -4,6 +4,7 @@ DATE: 2025-04-07T22:00:00
 DESCRIPTION: (高)斯(爱)慕棍哥
 TAGS:
   - study
+  - database
   - opengauss
 SERIES: study-database
 LICENSE: cc-sa

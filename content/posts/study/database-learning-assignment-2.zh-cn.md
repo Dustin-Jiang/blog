@@ -4,6 +4,7 @@ DATE: 2025-04-21T22:00:00
 DESCRIPTION: 笑传之触发器手搓交叉表
 TAGS:
   - study
+  - database
   - opengauss
 SERIES: study-database
 LICENSE: cc-sa

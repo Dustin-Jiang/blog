@@ -4,6 +4,7 @@ DATE: 2025-04-07T22:00:00
 DESCRIPTION: 视线, 过程 & 扳机.
 TAGS:
   - study
+  - database
   - opengauss
 SERIES: study-database
 LICENSE: cc-sa

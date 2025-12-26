@@ -4,6 +4,7 @@ DATE: 2025-02-27T12:00:00
 DESCRIPTION: 华为好, 华为美, 华为为我增智慧!
 TAGS:
   - study
+  - database
   - opengauss
 SERIES: study-database
 LICENSE: cc-sa

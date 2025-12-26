@@ -4,6 +4,7 @@ DATE: 2025-05-20T22:00:00
 DESCRIPTION: Delphi - 好, 坏, 丑
 TAGS:
   - study
+  - database
   - opengauss
 SERIES: study-database
 LICENSE: cc-sa
