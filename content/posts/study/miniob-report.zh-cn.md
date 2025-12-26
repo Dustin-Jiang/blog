@@ -5,7 +5,6 @@ DESCRIPTION: 刷分的尽头是抽卡
 TAGS:
   - study
   - database
-SERIES: study-database
 LICENSE: cc-sa
 ---
 
@@ -111,9 +110,9 @@ SELECT *
 2. 需要实现`DROP INDEX`
 3. 遇到了`UPDATE`的事务问题，进行了一些重构。`UPDATE`就简化成先`DELETE`旧数据再`INSERT`新数据
 
-吐槽点；
+吐槽点: 
 
-`UPDATE`在这道题需要 ==支持一条语句`SET`多条语句== ，找半天问题没想到是这里、、、
+`UPDATE`在这道题需要 ==支持一条语句`SET`多条语句== ，找半天问题没想到是这里...
 （这种就不能`UPDATE`那题就要求好吗）
 
 ## group-by
@@ -144,6 +143,8 @@ MiniOB的原始代码已经为我们写好了`GROUP BY`的LogicalOperator和Phys
   SELECT * FROM TABLE_ALIAS_1 T1
     WHERE ID IN (SELECT T2.ID FROM TABLE_ALIAS_2 T2 WHERE T2.COL2 >= T1.COL1);
   ```
+
+  这句查询中存在别名的共享, 子查询使用了主查询中定义的别名 `T1`. 
 
 5. 表达式中可能存在不同类型值比较。
 
@@ -207,9 +208,7 @@ SELECT ID FROM TAB_VEC
   ORDER BY DISTANCE(B, STRING_TO_VECTOR('[10, 0.0, 5.0]'), 'EUCLIDEAN') LIMIT 1;
 ```
 
-没什么坑，正常定义一套`VECTOR`的新类型就可以，注意 ==向量维度不匹配== 时需要返回`FAILURE`
-
-需要新实现`LIMIT`语句，也不难。
+没什么坑，正常定义一套`VECTOR`的新类型就可以，注意 ==向量维度不匹配== 时需要返回`FAILURE`. 需要新实现`LIMIT`语句，也不难。
 
 ## text
 
@@ -247,7 +246,7 @@ ALTER TABLE alter_table_1 RENAME TO alter_table_2;
 ALTER TABLE texts ADD FULLTEXT INDEX idx_texts_jieba (content) WITH PARSER jieba;
 ```
 
-==咱就不能一次把要求提完？==
+{{< btw >}}咱就不能一次把要求提完？{{< /btw >}}
 
 核心思路：先修改元数据→更新具体数据→持久化
 
@@ -304,9 +303,7 @@ SELECT id, content, MATCH(content) AGAINST('你好') AS score FROM texts
 
 需要支持`ALTER`添加全文索引、支持`WITH PARSER`和`MATCH AGAINST`来实现相关功能。
 
-利用BM25算法完成倒排索引，在插入和删除数据时更新相关统计信息。
-
-$$ \mathrm{score}(D, Q) = \sum_{i=1}^{n} \mathrm{IDF}(q_i) \cdot \frac{\mathrm{TF}(q_i, D) \cdot (k_1 + 1)}{\mathrm{TF}(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\mathrm{avgdl}}\right)} $$
+利用BM25算法完成倒排索引，在插入和删除数据时更新相关统计信息。$ \mathrm{score}(D, Q) = \sum_{i=1}^{n} \mathrm{IDF}(q_i) \cdot \frac{\mathrm{TF}(q_i, D) \cdot (k_1 + 1)}{\mathrm{TF}(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\mathrm{avgdl}}\right)} $
 
 - 分词与预处理：利用cppjieba完成分词，并去除停用词。定义一个新的`TOKENIZE`类型来实现。
 
@@ -330,19 +327,19 @@ MySQL存在浮点数计算误差问题, 一些情况下会出现`WHERE`子句的
 
 ==来MiniOB里抽卡来了.== 
 
-{< img src="/img/study/miniob-report/float_calc_error.jpg" >} 
+{{< img src="/img/study/miniob-report/float_calc_error.jpg" >} }
 
 
 ## 没有OR能430分
 
-{< img src="/img/study/miniob-report/no_or_stmt.jpg" >}
+{{< img src="/img/study/miniob-report/no_or_stmt.jpg" >}}
 
-==这扯不扯. == 
+==这扯不扯.==
 
 
 ## 附加题：RAG这是咋就过了
 
-{< img src="/img/study/miniob-report/微信图片_20251118160103.png" >}
+{{< img src="/img/study/miniob-report/微信图片_20251118160103.png" >}}
 
 要求：用langflow+miniob，搭配千问和BGE-M3等模型实现一个rag流程，达到一定正确率即可通过。
 
@@ -350,6 +347,6 @@ MySQL存在浮点数计算误差问题, 一些情况下会出现`WHERE`子句的
 
 为了定位问题我交了一个最简的`input→LLM→output`的版本不带任何其他功能
 
-？30分了？==分都给我了那还说啥呢。 ==
+？30分了？==分都给我了那还说啥呢。==
 
-{< img src="/img/study/miniob-report/langflow.png" >}
+{{< img src="/img/study/miniob-report/langflow.png" >}}
