@@ -327,7 +327,7 @@ MySQL存在浮点数计算误差问题, 一些情况下会出现`WHERE`子句的
 
 ==来MiniOB里抽卡来了.== 
 
-{{< img src="/img/study/miniob-report/float_calc_error.jpg" >} }
+{{< img src="/img/study/miniob-report/float_calc_error.jpg" >}}
 
 
 ## 没有OR能430分
