@@ -256,7 +256,7 @@ ALTER TABLE texts ADD FULLTEXT INDEX idx_texts_jieba (content) WITH PARSER jieba
 
 > 事务是数据库的基本功能，此功能希望同学们补充 MVCC（多版本并发控制）的 update 功能。这里主要考察不同连接同时操作数据库表时的问题。
 
-==实现`UNIQUE`就**自动好了**. ==
+==实现`UNIQUE`就**自动好了**.==
 
 其实`UNIQUE`还没AC这道题就好了，最友好的30分。
 
@@ -303,7 +303,9 @@ SELECT id, content, MATCH(content) AGAINST('你好') AS score FROM texts
 
 需要支持`ALTER`添加全文索引、支持`WITH PARSER`和`MATCH AGAINST`来实现相关功能。
 
-利用BM25算法完成倒排索引，在插入和删除数据时更新相关统计信息。$ \mathrm{score}(D, Q) = \sum_{i=1}^{n} \mathrm{IDF}(q_i) \cdot \frac{\mathrm{TF}(q_i, D) \cdot (k_1 + 1)}{\mathrm{TF}(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\mathrm{avgdl}}\right)} $
+利用BM25算法完成倒排索引，在插入和删除数据时更新相关统计信息。
+
+$$ \mathrm{score}(D, Q) = \sum_{i=1}^{n} \mathrm{IDF}(q_i) \cdot \frac{\mathrm{TF}(q_i, D) \cdot (k_1 + 1)}{\mathrm{TF}(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\mathrm{avgdl}}\right)} $$
 
 - 分词与预处理：利用cppjieba完成分词，并去除停用词。定义一个新的`TOKENIZE`类型来实现。
 

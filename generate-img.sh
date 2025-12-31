@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # \> in the end means it will only be resized if original image is bigger
-SIZE='2500x2500>'
+export SIZE='2500x2500>'
 
-for img in $(find ./img | grep "avif$"); do
+process_avif() {
+    img="$1"
     echo "Converting $img..."
     new_path=${img/'./img/'/'./assets/img/'}
     mkdir -p "$(dirname "$new_path")"
@@ -17,11 +18,13 @@ for img in $(find ./img | grep "avif$"); do
     fi
     # Generate minified AVIF
     if [[ ! -e $new_path ]]; then
-        convert "$img" -resize $SIZE -strip -quality 80 "$new_path"
+        convert "$img" -resize "$SIZE" -strip -quality 80 "$new_path"
     fi
-done
+}
+export -f process_avif
 
-for img in $(find ./img | grep "jpg$"); do
+process_jpg() {
+    img="$1"
     echo "Converting $img..."
     new_path=${img/'./img/'/'./assets/img/'}
     mkdir -p "$(dirname "$new_path")"
@@ -35,11 +38,13 @@ for img in $(find ./img | grep "jpg$"); do
     fi
     # Generate AVIF
     if [[ ! -e ${new_path/'.jpg'/'.avif'} ]]; then
-        convert "$img" -resize $SIZE -strip -quality 80 "${new_path/'.jpg'/'.avif'}"
+        convert "$img" -resize "$SIZE" -strip -quality 80 "${new_path/'.jpg'/'.avif'}"
     fi
-done
+}
+export -f process_jpg
 
-for img in $(find ./img | grep "png$"); do
+process_png() {
+    img="$1"
     echo "Converting $img..."
     new_path=${img/'./img/'/'./assets/img/'}
     mkdir -p "$(dirname "$new_path")"
@@ -57,9 +62,11 @@ for img in $(find ./img | grep "png$"); do
     if [[ ! -e ${new_path/'.png'/'.avif'} ]]; then
         convert "$img" -resize "$SIZE" -strip "${new_path/'.png'/'.avif'}"
     fi
-done
+}
+export -f process_png
 
-for img in $(find ./img | grep "heic$"); do
+process_heic() {
+    img="$1"
     echo "Converting $img..."
     new_path=${img/'./img/'/'./assets/img/'}
     mkdir -p "$(dirname "$new_path")"
@@ -76,4 +83,14 @@ for img in $(find ./img | grep "heic$"); do
     if [[ ! -e ${new_path/'.heic'/'.avif'} ]]; then
         convert "$img" -resize "$SIZE" -strip "${new_path/'.heic'/'.avif'}"
     fi
-done
+}
+export -f process_heic
+
+# Determine number of parallel jobs
+JOBS=$(nproc 2>/dev/null || echo 4)
+
+# Process images in parallel
+find ./img -name "*.avif" -print0 | xargs -0 -P "$JOBS" -I {} bash -c 'process_avif "$@"' _ {}
+find ./img -name "*.jpg" -print0 | xargs -0 -P "$JOBS" -I {} bash -c 'process_jpg "$@"' _ {}
+find ./img -name "*.png" -print0 | xargs -0 -P "$JOBS" -I {} bash -c 'process_png "$@"' _ {}
+find ./img -name "*.heic" -print0 | xargs -0 -P "$JOBS" -I {} bash -c 'process_heic "$@"' _ {}
