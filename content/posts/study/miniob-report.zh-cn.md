@@ -6,11 +6,12 @@ TAGS:
   - study
   - database
 LICENSE: cc-sa
+TOC: true
 ---
 
-# 题目简评
+## 题目简评
 
-## join-tables
+### join-tables
 
 1. 实现`INNER JOIN`功能，需要支持`join`多张表。
 2. 当前已经支持多表查询的功能，需要考虑 ==数据量比较大时== 如何处理。
@@ -41,7 +42,7 @@ SELECT * FROM JOIN_TABLE_LARGE_1
 
 在完善`PredictPushdownRewriter`之后, 执行```sql EXPLAIN```命令查看PhysicalOperator执行计划, 可以看到`Predict`节点被 ==尽可能下推== 到`TableScan`表扫描和`Join`笛卡尔积Operator之后.
 
-```
+```txt
 Query Plan
 OPERATOR(NAME)
 PROJECT
@@ -73,19 +74,19 @@ SELECT *
   INNER JOIN C ON B.id = C.b_id;
 ```
 
-## expression
+### expression
 
 > 实现表达式功能。这里的表达式仅考虑算数表达式，可以参考现有实现的 calc 语句，可以参考 表达式解析 ，在 SELECT 语句中实现。如果有些表达式运算结果有疑问，可以在 MySQL 中执行相应的 SQL，然后参考 MySQL 的执行即可。比如一个数字除以 0，应该按照NULL 类型的数字来处理。
 
 由于MiniOB已经实现了 `CALC` 语句, 其中基本已经实现了绝大部分`expression`计算需要的代码. 因此将需要`expression`进行运算的语句, 例如`WHERE`语句中的条件替换为`expression`, 即可基本通过测试. 
 
-## function
+### function
 
 > 实现一些常见的函数，包括`length`、`round`和`date_format`。
 
 函数的语法解析实际上和MiniOB中已为我们实现好的`SUM` ==聚合函数的解析基本一致== , 于是直接把解析聚合函数的语法解析器改成解析`UnboundedFunction`语句, 然后在`FunctionBinder`中根据函数名进行进一步的判断, 绑定为`FunctionExpr`或`AggregateExpr`. 
 
-## multi-index
+### multi-index
 
 > 多字段索引功能。即一个索引中同时关联了多个字段。此功能除了需要修改语法分析，还需要调整 B+ 树相关的实现。
 
@@ -98,7 +99,7 @@ SELECT *
 
 直接限制为支持 ==有限个字段== ，比较好通过
 
-## unique
+### unique
 
 > 实现支持多列的唯一索引功能。唯一索引是指一个索引上的数据都不是重复的。支持使用简单的 SQL 创建索引。需要考虑数据插入、数据更新等场景。
 
@@ -115,7 +116,7 @@ SELECT *
 `UPDATE`在这道题需要 ==支持一条语句`SET`多条语句== ，找半天问题没想到是这里...
 （这种就不能`UPDATE`那题就要求好吗）
 
-## group-by
+### group-by
 
 > 分组功能按照一定条件进行分组，目的是为了方便用户查询数据结果，分析数据。按照一个或多个字段对查询结果分组，需要支持`HAVING`子句用于筛选分组后的数据，因为聚合函数不能出现在`WHERE`后面。
 
@@ -123,7 +124,7 @@ MiniOB的原始代码已经为我们写好了`GROUP BY`的LogicalOperator和Phys
 
 由于`HAVING`基本逻辑和`WHERE`一致, 可 ==直接重用== `PredictPhysicalOperator`, 只需要修改关于聚合函数的合法性判断即可. 
 
-## simple-sub-query
+### simple-sub-query
 
 1. 支持简单的`IN` (`NOT IN`) 语句，注意`NOT IN`语句面对`NULL`时的特殊性。
 
@@ -152,7 +153,7 @@ MiniOB的原始代码已经为我们写好了`GROUP BY`的LogicalOperator和Phys
 
 在`ExpressionBinder`中, `SubqueryExpr`需要根据语法解析得到的`SqlNode`生成`SelectStmt`, 而在表达式求值时对`SubqueryExpr`额外执行`open()`和`close()`操作来读取数据文件.
 
-## alias
+### alias
 
 别名基本没什么问题, 主要是子查询中外部别名需要传入. 
 
@@ -167,7 +168,7 @@ SELECT T1.ID AS NUM, T1.COL1 AS AGE, T1.FEAT1, T2.*
 SELECT * AS ALIAS FROM TABLE_ALIAS_1 T1;
 ```
 
-## null
+### null
 
 NULL值 ==和任何值比较== 结果都是FALSE. 
 
@@ -180,7 +181,7 @@ NULL值 ==和任何值比较== 结果都是FALSE.
 - NULL需要支持UPDATE的子查询（而子查询那道题却没有要求）
 - NULL也需要通过刷脸来过掉一些不明问题的用例
 
-## union
+### union
 
 > `UNION`操作符用于连接两个以上的`SELECT`语句的结果组合到一个结果集合，并去除重复的行，而`UNION ALL`不去除重复行。
 
@@ -188,13 +189,13 @@ NULL值 ==和任何值比较== 结果都是FALSE.
 
 由于MiniOB不禁止使用STL, 所以去重只需要将Tuple存入```cpp std::set```中即可. 
 
-## order-by
+### order-by
 
 `ORDER BY`和`UNION`差别不大, 同样新建LogicalOperator和PhysicalOperator, 然后在PhysicalOperator中将Tuple存入```cpp std::priority_queue```中即可. 
 
 遇到比较坑的问题是, `Operator.current_tuple()` 返回的指针永远指向同一个地址, 不能只储存这个指针, 而是需要实现 ==`Tuple.copy()`== 复制对象, 实现数据持久化. 
 
-## vector-basic/search
+### vector-basic/search
 
 1. 支持创建包含向量类型的表。
 
@@ -210,7 +211,7 @@ SELECT ID FROM TAB_VEC
 
 没什么坑，正常定义一套`VECTOR`的新类型就可以，注意 ==向量维度不匹配== 时需要返回`FAILURE`. 需要新实现`LIMIT`语句，也不难。
 
-## text
+### text
 
 > `text`字段的最大长度为 65,535 个字节，除了需要实现语法解析，还需要考虑如何在存储引擎中存放超长字段，以支持超过一页的数据。
 
@@ -227,7 +228,7 @@ struct TextData {
 唯一提测坑点：测试的文本很长，所以`MAX_MEM_BUFFER_SIZE`（obclient的传输支持大小）需要开大一点（==我直接把8192乘了1024就过了==）
 
 
-## alter
+### alter
 
 > `ALTER`命令允许你添加、修改或删除数据库对象，并且可以用于更改表的列定义、添加约束、创建和删除索引等操作。
 
@@ -252,7 +253,7 @@ ALTER TABLE texts ADD FULLTEXT INDEX idx_texts_jieba (content) WITH PARSER jieba
 
 - 要注意NULL位图的处理、change新旧字段名相同是SUCCESS情况
 
-## update-mvcc
+### update-mvcc
 
 > 事务是数据库的基本功能，此功能希望同学们补充 MVCC（多版本并发控制）的 update 功能。这里主要考察不同连接同时操作数据库表时的问题。
 
@@ -260,7 +261,7 @@ ALTER TABLE texts ADD FULLTEXT INDEX idx_texts_jieba (content) WITH PARSER jieba
 
 其实`UNIQUE`还没AC这道题就好了，最友好的30分。
 
-## complex-sub-query
+### complex-sub-query
 
 > 复杂子查询中子查询中会跟父查询联动, 需要支持`EXISTS` (`NOT EXISTS`) 语句。
 
@@ -268,7 +269,7 @@ ALTER TABLE texts ADD FULLTEXT INDEX idx_texts_jieba (content) WITH PARSER jieba
 
 支持`EXISTS`和`NOT EXISTS`运算符和`IN` / `NOT IN`运算符基本一致, 需要注意的是`EXISTS`运算符是 ==单目运算符== , 语法解析和表达式绑定时需要一定特殊处理.
 
-## create-view
+### create-view
 
 > 视图，顾名思义，就是一个能够自动执行查询语句的虚拟表。
 >
@@ -282,13 +283,13 @@ ALTER TABLE texts ADD FULLTEXT INDEX idx_texts_jieba (content) WITH PARSER jieba
 
 在还有两天截止时开始尝试，到最后一天发现确实做不完就， ==反正分够了 摆了.== 
 
-## big-order-by
+### big-order-by
 
 > 在内存有限的情况下，实现大数据量的排序，需要优化内存使用。有四张表，每张表有20个字段，数据量在20左右，所有表在一起做笛卡尔积查询，并且对每个字段都会做`ORDER BY`排序。
 
 之前`ORDER BY`用`std::priority_queue`偷的懒不得不还回来了. 但是 ==GPT-5-Codex写的外部排序== 一次性过了提测.
 
-## full-text-index
+### full-text-index
 
 > 全文索引（Full-Text Search）是一种用于在大量文本数据中进行高效搜索的技术。它通过基于相似度的查询，而不是精确数值比较，来查找文本中的相关信息。相比于使用 LIKE + % 的模糊匹配，全文索引在处理大量数据时速度更快。
 
@@ -317,9 +318,9 @@ $$ \mathrm{score}(D, Q) = \sum_{i=1}^{n} \mathrm{IDF}(q_i) \cdot \frac{\mathrm{T
   - 利用`std::unordered_map`哈希表存储分词结果
   - 查询时不需要再进行分词，可以秒出结果，本题PASS。
 
-# 吐槽
+## 吐槽
 
-## 浮点数问题
+### 浮点数问题
 
 MySQL存在浮点数计算误差问题, 一些情况下会出现`WHERE`子句的筛选结果数量少于预期. 
 
@@ -332,14 +333,14 @@ MySQL存在浮点数计算误差问题, 一些情况下会出现`WHERE`子句的
 {{< img src="/img/study/miniob-report/float_calc_error.jpg" >}}
 
 
-## 没有OR能430分
+### 没有OR能430分
 
 {{< img src="/img/study/miniob-report/no_or_stmt.jpg" >}}
 
 ==这扯不扯.==
 
 
-## 附加题：RAG这是咋就过了
+### 附加题：RAG这是咋就过了
 
 {{< img src="/img/study/miniob-report/微信图片_20251118160103.png" >}}
 
